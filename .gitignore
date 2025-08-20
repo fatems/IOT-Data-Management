@@ -1,0 +1,31 @@
+
+# Dependencies - These can be re-installed from package.json and yarn.lock
+/node_modules
+node_modules/
+
+# Build Output - This is generated from your source code and should not be versioned.
+/dist
+dist/
+
+# Secrets & Environment Variables (VERY IMPORTANT)
+# Never commit your passwords or secret keys to a public repository.
+.env
+*.env
+
+# Logs - These are temporary files generated during runs or debugging.
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
+
+# OS-generated files - Common files from macOS, Windows, and Linux that don't belong in a repo.
+.DS_Store
+Thumbs.db
+.classpath
+.project
+.settings
+
+# IDE-specific files - Configuration for editors like VS Code.
+.vscode/
+.idea/

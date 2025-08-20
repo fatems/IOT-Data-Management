@@ -1,0 +1,41 @@
+services:
+  # Infrastructure Services
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+  # Application Services
+  consumer-api:
+    build: ./consumer-api
+    container_name: consumer-api
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://root:password@mongodb:27017/panto-db?authSource=admin
+      - RABBITMQ_URI=amqp://user:password@rabbitmq:5672
+    depends_on:
+      - rabbitmq
+      - mongodb
+
+  producer-cli:
+    build: ./producer-cli
+    container_name: producer-cli
+    environment:
+      - RABBITMQ_URI=amqp://user:password@rabbitmq:5672
+    depends_on:
+      - rabbitmq
