@@ -41,3 +41,5 @@ services:
       - RABBITMQ_URI=amqp://user:password@rabbitmq:5672
     depends_on:
       - rabbitmq
+volumes:
+  mongodb_data:
